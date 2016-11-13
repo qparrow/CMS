@@ -19,7 +19,7 @@ from django.contrib import admin
 from focus import views
 urlpatterns = [
     #url(r'^$','cms.views.home',name='home')
-    #url(r'^blog/',include(focus_urls)),
+    #url(r'^blog/',include(blog.urls)),
     url(r'^focus/',include(focus_urls)),
     url(r'^$',views.index,name='index'),
     url(r'^admin/', admin.site.urls),
