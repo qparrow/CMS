@@ -132,20 +132,22 @@
 			</div>		
 		
 			<!-- Articles -->
+			{% for article in latest_article_list %}
 			<div class="row">
 				<article class="col-xs-12">
-					<h2>Premier Niche Markets</h2>
-					<p>Phosfluorescently engage worldwide methodologies with web-enabled technology. Interactively coordinate proactive e-commerce via process-centric "outside the box" thinking. Completely pursue scalable customer service through sustainable potentialities.</p>
-					<p><button class="btn btn-outline-success">Read More</button></p>
-					<p class="pull-right"><span class="tag tag-default">keyword</span> <span class="tag tag-default">tag</span> <span class="tag tag-default">post</span></p>
+					<h2><a id="article_title",href="/focus/{{article_id}}">{{article_title}}</h2>
+					<p>{{article.content|truncatechars_html:80 | safe}}</p>
+					<!-- <p><button class="btn btn-outline-success">Read More</button></p> -->
+					<p class="pull-right"><span class="label label-default">{{article.column}}</span> <span class="label label-default">tag</span> <span class="lab lab-default">{{article.author}}</span></p>
 					<ul class="list-inline">
-						<li class="list-inline-item"><a href="#">Today</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-comment"></span> 2 Comments</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span> 8 Shares</a></li>
+						<li ><a href="#">{{article.pub_date | date:"j M"}}</a></li>
+						<li ><a href="#"><span class="glyphicon glyphicon-comment"></span>{{article.comment_num}} Comments</a></li>
+						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span>{{article.keep_num}} Favorites</a></li>
 					</ul>
 				</article>
 			</div>
 			<hr>
+			{% endfor %}
 			<div class="row">
 				<article class="col-xs-12">
 					<h2>Proactively Envisioned</h2>
@@ -179,48 +181,43 @@
 
 	  <!-- Right Column -->
 	  <div class="col-sm-3">
-
+	  		{% if request.user.is_authenticate %}
 			<!-- Form --> 
-			<div class="card">
-				<div class="card-header p-b-0">
-					<h5 class="card-title">
-						<i class="fa fa-sign-in" aria-hidden="true"></i> 
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-user" aria-hidden="true"></span> 
 						Log In
-					</h5>
+					</h3>
 				</div>
-				<div class="card-block">
-					<form>
-						<div class="form-group">
-							<input type="text" class="form-control" id="uid" name="uid" placeholder="Username">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
-						</div>
-						<button type="submit" class="btn btn-primary">Log In</button>
-					</form>
+				<div class="panel-body">
+						<div class="form-group">hi:{{ user }} <a href="/focus/logout/"><input class="bth bth-default" type="submit" value="logout" /></a>
 				</div>
 			</div>
- 
-			<!-- Progress Bars -->
-			<div class="card">
-				<div class="card-header p-b-0">
-					<h5 class="card-title">
-						<i class="fa fa-tachometer" aria-hidden="true"></i> 
-						Dramatically Engage
-					</h5>
+			{% else %}
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">
+						<span class="glyphicon glyphicon-log-in"></span> 
+						Log In
+					</h3>
 				</div>
-				<div class="card-block">
-                    <div class="text-xs-center" id="progress-caption-1">Proactively Envisioned &hellip; 100%</div>
-                    <progress class="progress progress-success" value="100" max="100" aria-describedby="progress-caption-1"></progress>
-                    <div class="text-xs-center" id="progress-caption-2">Objectively Innovated &hellip; 80%</div>
-                    <progress class="progress progress-info" value="80" max="100" aria-describedby="progress-caption-2"></progress>
-                    <div class="text-xs-center" id="progress-caption-3">Portalled &hellip; 45%</div>
-                    <progress class="progress progress-warning" value="45" max="100" aria-describedby="progress-caption-3"></progress>
-                    <div class="text-xs-center" id="progress-caption-4">Done &hellip; 35%</div>
-                    <progress class="progress progress-danger" value="35" max="100" aria-describedby="progress-caption-4"></progress>
+				<div class="panel-body">
+                    <form action="/focus/login/" method="post">
+                    	{% csrf_token %}
+                    	{{loginform.no_field_errors}}
+                    	<div class="form-group">
+                    		{{loginform.uid}}
+                    	</div>
+                    	<div class="form-group">
+                    		{{loginform.pwd}}
+                    	</div>
+                    	<button type="submit" class="bth bth-default">Log In</button>
+                    </form>
 				</div>
 			</div>
-
+			{% endif %}
+			
 			<!-- Carousel --> 
  			<h4><i class="fa fa-language" aria-hidden="true"></i> Synergization</h4>
 			<div id="side-carousel" class="carousel slide" data-ride="carousel">
@@ -270,7 +267,7 @@
 
 	  </div><!--/Right Column -->
 
-	</div><!--/container-fluid-->
+	</div><!--/container-fluid--> 
 	
 	<footer>
 		<div class="footer-blurb">
