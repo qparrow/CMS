@@ -21,6 +21,8 @@
     <!-- For icons -->
     <link href='{% static "css/font-awesome-4.6.3/css/font-awesome.min.css" %}' rel="stylesheet">
 
+    <link href='{% static "css/Pygments.css" %}' rel='stylesheet'>
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -71,114 +73,57 @@
     
 
 <div class="container-fluid">
-
-		<!-- Left Column -->
-		<div class="col-sm-3">
-
-			<!-- List-Group Panel -->
-			<div class="card">
-				<div class="card-header p-b-0">
-					<h5 class="card-title"><i class="fa fa-random" aria-hidden="true"></i> Completely Synergize</h5>
-				</div>
-				<div class="list-group list-group-flush">
-					<a href="#" class="list-group-item list-group-item-action">Resource Taxing</a>
-					<a href="#" class="list-group-item list-group-item-action">Premier Niche Markets</a>
-					<a href="#" class="list-group-item list-group-item-action">Dynamically Innovate</a>
-					<a href="#" class="list-group-item list-group-item-action">Objectively Innovate</a>
-					<a href="#" class="list-group-item list-group-item-action">Proactively Envisioned</a>
-				</div>
-			</div>
-
-			<!-- Text Panel -->
-			<div class="card">
-				<div class="card-header p-b-0">
-					<h5 class="card-title"><i class="fa fa-cog" aria-hidden="true"></i> Dramatically Engage</h5>
-				</div>
-
-				<div class="card-block">
-					<p class="card-text">Objectively innovate empowered manufactured products whereas parallel platforms. Holisticly predominate extensible testing procedures for reliable supply chains. Dramatically engage top-line web services vis-a-vis cutting-edge deliverables.</p>
-					<p><button class="btn btn-secondary">Engage</button></p>
-				</div>
-			</div>
-
-			<!-- Text Panel -->
-			<div class="card">
-				<div class="card-header p-b-0">
-					<h5 class="card-title">
-						<i class="fa fa-bullhorn" aria-hidden="true"></i>
-						Active Predomination
-					</h5>
-				</div>
-				<div class="card-block">
-					<p class="card-text">Proactively envisioned multimedia based expertise and cross-media growth strategies.</p>
-					<div class="btn-group btn-group-sm" role="group">
-						<button type="button" class="btn btn-secondary">Resource</button>
-						<button type="button" class="btn btn-secondary">Envision</button>
-						<button type="button" class="btn btn-secondary">Niche</button>
-					</div>
-				</div>
-			</div>	
-				
-		</div><!--/Left Column-->
   
-  
-		<!-- Center Column -->
-		<div class="col-sm-6">
-		
-			<!-- Alert -->
-			<div class="alert alert-success alert-dismissible" role="alert">
-				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<strong>Synergize:</strong> Seamlessly visualize quality intellectual capital!
-			</div>		
-		
-			<!-- Articles -->
-			{% for article in latest_article_list %}
-			<div class="row">
-				<article class="col-xs-12">
-					<h2><a id="article_title",href="/focus/{{article_id}}">{{article_title}}</h2>
-					<p>{{article.content|truncatechars_html:80 | safe}}</p>
-					<!-- <p><button class="btn btn-outline-success">Read More</button></p> -->
-					<p class="pull-right"><span class="label label-default">{{article.column}}</span> <span class="label label-default">tag</span> <span class="lab lab-default">{{article.author}}</span></p>
-					<ul class="list-inline">
-						<li ><a href="#">{{article.pub_date | date:"j M"}}</a></li>
-						<li ><a href="#"><span class="glyphicon glyphicon-comment"></span>{{article.comment_num}} Comments</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span>{{article.keep_num}} Favorites</a></li>
-					</ul>
-				</article>
-			</div>
-			<hr>
-			{% endfor %}
-			<div class="row">
-				<article class="col-xs-12">
-					<h2>Proactively Envisioned</h2>
-					<p>Seamlessly visualize quality intellectual capital without superior collaboration and idea-sharing. Holistically pontificate installed base portals after maintainable products. Proactively envisioned multimedia based expertise and cross-media growth strategies.</p>
-					<p><button class="btn btn-outline-primary">Read More</button></p>
-					<p class="pull-right"><span class="tag tag-default">keyword</span> <span class="tag tag-default">tag</span> <span class="tag tag-default">post</span></p>
-					<ul class="list-inline">
-						<li class="list-inline-item"><a href="#">Yesterday</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-comment"></span> 21 Comments</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span> 36 Shares</a></li>
-					</ul>
-				</article>
-			</div>
-			<hr>      
-			<div class="row">
-				<article class="col-xs-12">
-					<h2>Completely Synergize</h2>
-					<p>Completely synergize resource taxing relationships via premier niche markets. Professionally cultivate one-to-one customer service with robust ideas. Dynamically innovate resource-leveling customer service for state of the art customer service.</p>
-					<p><button class="btn btn-outline-danger">Read More</button></p>
-					<p class="pull-right"><span class="tag tag-default">keyword</span> <span class="tag tag-default">tag</span> <span class="tag tag-default">post</span></p>
-					<ul class="list-inline">
-						<li class="list-inline-item"><a href="#">2 Days Ago</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-comment"></span> 12 Comments</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span> 18 Shares</a></li>
-					</ul>
-				</article>
-			</div>
-			<hr>
-		</div><!--/Center Column-->
-
-
+	<!-- Center Column -->
+        <div class="col-sm-9">        
+            <!-- Article -->
+            <div class="row">
+                <article class="col-xs-12">
+                    <h2>{{ article.title }}</h2>
+                    <p class="pull-right"><span class="label label-default">{{ article.column }}</span> <span class="label label-default">{{ article.pub_date | date:"j M" }}</span> <span class="label label-default">{{ article.author }}</span></p>
+                    <p><hr></p>
+                    <p>{{ content | safe }}</p>                 
+                    <p></p>
+                    <ul class="list-inline">
+                        <li><a href=" "><span class="glyphicon glyphicon-comment"></span> {{ article.comment_num }} Comments</a></li>
+                        <li><a href="/focus/{{ article.id }}/keep/"><span class="glyphicon glyphicon-star-empty"></span>{{ article.keep_num }} Favorites</a></li>
+                        <li><a href="/focus/{{ article.id }}/poll/"><span class="glyphicon glyphicon-thumbs-up"></span>{{ article.poll_num }} Upvotes</a></li>
+                    </ul>
+                </article>
+            </div>            
+            <hr>
+            
+            <!-- Comments -->
+            <h3>Comments:</h3>
+            <hr>
+            {% for comment in comments %}
+            <div class="row">
+                
+                <article class="col-xs-12">
+                    <p class="pull-right"> <span class="label label-default">tag</span> <span class="label label-default">{{ comment.user }}</span></p>
+                    <p>{{ comment.content }}</p>                    
+                    <ul class="list-inline">
+                        <li><a href=" ">{{ comment.pub_date | date:"j M" }}</a></li>
+                        <li><a href=" "><span class="glyphicon glyphicon-comment"></span> {{ comment.comment_num }} Comments</a></li>
+                        <li><a href=" "><span class="glyphicon glyphicon-thumbs-up"></span>{{ comment.poll_num }} Upvotes</a></li>
+                    </ul>
+                </article>
+            </div>            
+            <hr>
+            {% endfor %}
+            <div class="row">
+                <article class="col-xs-12">
+                    <h4>Sharing you comment:</h4>
+                    <form action="/focus/{{ article.id }}/comment/" method="post">
+                        {% csrf_token %}
+                        {{ commentform.as_p }}
+                        <input class="btn btn-default" type="submit" value="Submit" />
+                    </form>
+                </article>
+            </div>            
+            <hr>
+      </div>
+      <!--/Center Column-->
 	  <!-- Right Column -->
 	  <div class="col-sm-3">
 	  		{% if request.user.is_authenticate %}
@@ -217,6 +162,7 @@
 				</div>
 			</div>
 			{% endif %}
+			
 			<!-- Carousel --> 
  			<h4><i class="fa fa-language" aria-hidden="true"></i> Synergization</h4>
 			<div id="side-carousel" class="carousel slide" data-ride="carousel">
@@ -266,7 +212,7 @@
 
 	  </div><!--/Right Column -->
 
-	</div><!--/container-fluid-->
+	</div><!--/container-fluid--> 
 	
 	<footer>
 		<div class="footer-blurb">
