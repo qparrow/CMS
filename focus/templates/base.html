@@ -68,32 +68,8 @@
             </ul>
         </div>
     </nav>
-    
-
-<div class="container-fluid">
-		<!-- Center Column -->
-		<div class="col-sm-10" style="float:none;margin-left:auto;margin-right:auto">
-			<!-- Articles -->
-			{% for article in latest_article_list %}
-			<div class="row">
-				<article class="col-xs-12">
-					<h2>{{article.title}}</h2>
-					<br>
-					<p>{{article.content|truncatechars_html:300 | safe}}</p>
-					<p><a href='/focus/{{article.id}}'><button class="btn btn-outline-success">Read More</button></a></p>
-					<p class="pull-right"><span class="tag tag-default">{{article.column}}</span>  <span class="tag tag-default">{{article.author}}</span></p>
-					<ul class="list-inline">
-						<li ><a href="#">{{article.pub_date | date:"j M"}}</a></li>
-						<li ><a href="#"><span class="glyphicon glyphicon-comment"></span>{{article.comment_num}} Comments</a></li>
-						<li class="list-inline-item"><a href="#"><span class="glyphicon glyphicon-share"></span>{{article.keep_num}} Favorites</a></li>
-					</ul>
-				</article>
-			</div>
-			<hr>
-			{% endfor %}
-		</div><!--/Center Column-->
-
-	</div><!--/container-fluid-->
+    {block content}
+    {block content}
 	
 	<footer>        
         <div class="small-print">

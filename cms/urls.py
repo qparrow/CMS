@@ -18,9 +18,7 @@ from focus import urls as focus_urls
 from django.contrib import admin
 from focus import views
 urlpatterns = [
-    #url(r'^$','cms.views.home',name='home')
-    #url(r'^blog/',include(blog.urls)),
     url(r'^focus/',include(focus_urls)),
-    url(r'^$',views.index,name='index'),
+    url(r'^home/$',views.index,name='home'),
     url(r'^admin/', admin.site.urls),
 ]

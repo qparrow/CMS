@@ -13,7 +13,7 @@ import markdown2,urlparse
 def index(request):
 	latest_article_list=Article.objects.query_by_time()
 	loginform=LoginForm()
-	context={'latest_article_list':latest_article_list,'loginform':loginform}
+	context={'latest_article_list':latest_article_list}
 	return render(request,'index.html',context)
 
 
@@ -112,7 +112,7 @@ def get_poll_article(request,article_id):
 		return redirect('/focus/')
 
 ###############################################################################
-'''
+
 def register(request):
 	error1="this name already exist"
 	valid='this name is valid'
@@ -125,7 +125,7 @@ def register(request):
 		if request.POST.get('raw_username','erjgiqfv240hqp5668ej23foi')!='erjgiqfv240hqp5668ej23foi':
 			try:
 				user=NewUser.objects.get(username=request.POST.get('raw_username',''))
-			except:ObjectDoesNotExist:
+			except ObjectDoesNotExist:
 				return render(request,'register.html',{'form':form,'msg':valid})
 			else:
 				return render(request,'register.html',{'form':form,'msg':error1})
@@ -143,5 +143,4 @@ def register(request):
 					return redirect('/focus/login')
 			else:
 				return render(request,'register.html',{'form':form})
-'''
 
