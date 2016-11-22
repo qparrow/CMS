@@ -12,32 +12,29 @@ import markdown2,urlparse
 
 def index(request):
 	latest_article_list=Article.objects.query_by_time()
-	loginform=LoginForm()
 	context={'latest_article_list':latest_article_list}
 	return render(request,'index.html',context)
 
 
 def log_in(request):
 	if request.method=='GET':
-		form=LoginForm()
-		return render(request,'login.html',{'form':form})
+		return render(request,'login.html')
 	if request.method=='POST':
+		print 'user pass'
 		form=LoginForm(request.POST)
 		if form.is_valid():
 			username=form.cleaned_data['uid']
 			password=form.cleaned_data['pwd']
 			user=authenticate(username=username,password=password)
-			if user is not None:
-				login(request,user)
-				url=request.POST.get('source_url','/focus')
-				return redirect(url)
+			if user :
+				pass
 			else:
-				return render(request,'login.html',{'form':form,'error':"password or username is not true!"})
-		else:
-			return render(request,'login.html',{'form':form})
+				error=True
+				return render(request,'login.html',{'error':error})
+
 
 ###############################################################################
-
+'''
 @login_required
 def log_out(request):
 	url=request.POST.get('source_url','/focus/')
@@ -144,3 +141,4 @@ def register(request):
 			else:
 				return render(request,'register.html',{'form':form})
 
+'''
