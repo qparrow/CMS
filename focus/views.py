@@ -12,21 +12,24 @@ import markdown2,urlparse
 ###############################################################################
 
 def index(request):
+	url=request.get_full_path()
+	request.session["referer_url"]=url
 	latest_article_list=Article.objects.query_by_time()
-	if request.user is not None:
+	if request.user.is_anonymous()==False:
 		u_active=True
-		user_page='用户'
-		content={'latest_article_list':latest_article_list,'u_active':u_active,"user":user_page}
+		user=request.user.username
+		content={'latest_article_list':latest_article_list,"u_active":u_active,"user":user}
 		return render(request,'index.html',content)
 	else:
-		context={'latest_article_list':latest_article_list,'u_active':False}
+		u_active=False
+		context={'latest_article_list':latest_article_list,"u_active":u_active}
 		return render(request,'index.html',context)
 
 
 def log_in(request):
 	if request.method=='GET':
 		url=request.META.get('HTTP_REFERER')
-		request.session["source_url"]=url
+		request.session["referer_url"]=url
 		return render(request,'login.html')
 	if request.method=='POST':
 		form=LoginForm(request.POST)
@@ -36,7 +39,7 @@ def log_in(request):
 			user=authenticate(username=username,password=password)
 			if user is not None:
 				login(request,user)
-				url=request.session["source_url"]
+				url=request.session["referer_url"]
 				return redirect(url)
 			else:
 				error=True
@@ -50,7 +53,7 @@ def log_in(request):
 
 @login_required
 def log_out(request):
-	url=request.session['source_url']
+	url=request.session['referer_url']
 	logout(request)
 	return redirect(url)
 
