@@ -66,15 +66,11 @@ a.back{
 	border-bottom:1px solid #ddd;
 }
 .form_wrapper form{
-	display:none;
-	background:#fff;
+	display:block;
 }
 .form_wrapper .column{
 	width:47%;
 	float:left;
-}
-form.active{
-	display:block;
 }
 
 .form_wrapper a{
@@ -158,14 +154,6 @@ form.active{
 .form_wrapper div.remember input{
 	float:left;
 	margin:2px 5px 0px 0px;
-}
-.form_wrapper span.error{
-	visibility:hidden;
-	color:red;
-	font-size:11px;
-	font-style:italic;
-	display:block;
-	margin:4px 30px;
 }
 .form_wrapper input[type="submit"] {
 	background: #e3e3e3;

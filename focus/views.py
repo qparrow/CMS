@@ -1,3 +1,4 @@
+#-*- coding:utf-8 -*-
 from .forms import LoginForm,RegisterForm,SetInForm,CommentForm,SearchForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login,logout
@@ -12,37 +13,49 @@ import markdown2,urlparse
 
 def index(request):
 	latest_article_list=Article.objects.query_by_time()
-	context={'latest_article_list':latest_article_list}
-	return render(request,'index.html',context)
+	if request.user is not None:
+		u_active=True
+		user_page='用户'
+		content={'latest_article_list':latest_article_list,'u_active':u_active,"user":user_page}
+		return render(request,'index.html',content)
+	else:
+		context={'latest_article_list':latest_article_list,'u_active':False}
+		return render(request,'index.html',context)
 
 
 def log_in(request):
 	if request.method=='GET':
+		url=request.META.get('HTTP_REFERER')
+		request.session["source_url"]=url
 		return render(request,'login.html')
 	if request.method=='POST':
-		print 'user pass'
 		form=LoginForm(request.POST)
 		if form.is_valid():
 			username=form.cleaned_data['uid']
 			password=form.cleaned_data['pwd']
 			user=authenticate(username=username,password=password)
-			if user :
-				pass
+			if user is not None:
+				login(request,user)
+				url=request.session["source_url"]
+				return redirect(url)
 			else:
 				error=True
 				return render(request,'login.html',{'error':error})
+		else:
+			error=True
+			return render(request,'login.html',{'error':error})
 
 
 ###############################################################################
-'''
+
 @login_required
 def log_out(request):
-	url=request.POST.get('source_url','/focus/')
+	url=request.session['source_url']
 	logout(request)
 	return redirect(url)
 
 ###############################################################################
-
+'''
 def article(request,article_id):
 	article=get_object_or_404(Article,id=article_id)
 	content=markdown2.markdown(article.content,extras=['code-friendly','fenced-code-blocks','header-ids','toc','metadata'])

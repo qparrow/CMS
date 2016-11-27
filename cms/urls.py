@@ -19,5 +19,6 @@ from focus import views
 urlpatterns = [
     url(r'^index/$',views.index,name='index'),
     url(r'^login/$',views.log_in,name='login'),
+    url(r'^logout/$',views.log_out,name='logout'),
     url(r'^admin/', admin.site.urls),
 ]
