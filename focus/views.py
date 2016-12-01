@@ -15,7 +15,7 @@ def index(request):
 	url=request.get_full_path()
 	request.session["referer_url"]=url
 	latest_article_list=Article.objects.query_by_time()
-	if not request.user.is_anonymous():
+	if request.user.is_authenticated():
 		u_active=True
 		user=request.user.username
 		content={'latest_article_list':latest_article_list,"u_active":u_active,"user":user}
@@ -25,6 +25,9 @@ def index(request):
 		context={'latest_article_list':latest_article_list,"u_active":u_active}
 		return render(request,'index.html',context)
 
+def register(request):
+	if request.method=='GET':
+		return render(request,'register.html')
 
 def log_in(request):
 	if request.method=='GET':

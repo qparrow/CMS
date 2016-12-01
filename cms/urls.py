@@ -18,6 +18,7 @@ from django.contrib import admin
 from focus import views
 urlpatterns = [
     url(r'^index/$',views.index,name='index'),
+    url(r'^register/$',views.register,name='register'),
     url(r'^login/$',views.log_in,name='login'),
     url(r'^logout/$',views.log_out,name='logout'),
     url(r'^login/change_pwd/$',views.change_pwd,name='chamge_pwd'),
