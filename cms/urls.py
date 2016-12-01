@@ -20,5 +20,6 @@ urlpatterns = [
     url(r'^index/$',views.index,name='index'),
     url(r'^login/$',views.log_in,name='login'),
     url(r'^logout/$',views.log_out,name='logout'),
+    url(r'^login/change_pwd/$',views.change_pwd,name='chamge_pwd'),
     url(r'^admin/', admin.site.urls),
 ]

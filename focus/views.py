@@ -15,7 +15,7 @@ def index(request):
 	url=request.get_full_path()
 	request.session["referer_url"]=url
 	latest_article_list=Article.objects.query_by_time()
-	if request.user.is_anonymous()==False:
+	if not request.user.is_anonymous():
 		u_active=True
 		user=request.user.username
 		content={'latest_article_list':latest_article_list,"u_active":u_active,"user":user}
@@ -29,7 +29,7 @@ def index(request):
 def log_in(request):
 	if request.method=='GET':
 		url=request.META.get('HTTP_REFERER')
-		request.session["referer_url"]=url
+		request.session["source_url"]=url
 		return render(request,'login.html')
 	if request.method=='POST':
 		form=LoginForm(request.POST)
@@ -39,7 +39,7 @@ def log_in(request):
 			user=authenticate(username=username,password=password)
 			if user is not None:
 				login(request,user)
-				url=request.session["referer_url"]
+				url=request.session["source_url"]
 				return redirect(url)
 			else:
 				error=True
@@ -49,13 +49,26 @@ def log_in(request):
 			return render(request,'login.html',{'error':error})
 
 
-###############################################################################
-
 @login_required
 def log_out(request):
 	url=request.session['referer_url']
 	logout(request)
 	return redirect(url)
+
+def change_pwd(request):
+	if request.method=='GET':
+		return render(request,'change_pwd.html')
+	if request.method=='POST':
+		email=request.POST['email']
+		user=authenticate(email=email)
+		if user is not None:
+			message='邮件已发送,请登录邮箱更改密码！'
+			return render(request,'change_pwd.html',{"message":message})
+		else:
+			message='邮箱错误或未注册!'
+			return render(request,'change_pwd.html',{"message":message})
+
+
 
 ###############################################################################
 '''
